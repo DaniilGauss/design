@@ -43,12 +43,10 @@
       overflow: hidden;
     }
 
-    /* матовая диагональная текстура + параллакс */
     .page::before {
       content: "";
       position: absolute;
       inset: -40px;
-      pointer-events: none;
       background:
         repeating-linear-gradient(
           45deg,
@@ -59,13 +57,10 @@
         );
       opacity: 0.35;
       mix-blend-mode: soft-light;
-      z-index: 0;
       transform: translate3d(0, calc(var(--scroll-f) * -14px), 0);
-      transition: transform 0.1s linear;
-      will-change: transform;
+      transition: transform .1s linear;
     }
 
-    /* тех-рамка с лёгким движением */
     .page::after {
       content: "";
       position: absolute;
@@ -75,14 +70,11 @@
       box-shadow:
         0 0 0 1px rgba(0,0,0,0.7),
         0 0 40px rgba(0,0,0,0.8);
-      pointer-events: none;
-      z-index: 0;
       transform: translate3d(0, calc(var(--scroll-f) * 6px), 0);
-      transition: transform 0.1s linear;
-      will-change: transform;
+      transition: transform .1s linear;
     }
 
-    /* микро-текстовые артефакты */
+    /* микро-тех надписи */
     .page-micro {
       position: fixed;
       z-index: 10;
@@ -91,6 +83,7 @@
       text-transform: uppercase;
       color: rgba(154,158,170,0.55);
       pointer-events: none;
+      white-space: nowrap;
     }
     .page-micro--tl { left: 22px; bottom: 18px; }
     .page-micro--tr { right: 22px; top: 18px; }
@@ -98,7 +91,6 @@
     /* HERO */
 
     .hero {
-      position: relative;
       max-width: 1180px;
       margin: 0 auto;
       padding: 64px 40px 80px;
@@ -106,6 +98,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
       z-index: 1;
     }
 
@@ -117,6 +110,7 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
+      gap: 16px;
     }
 
     .hero-logo {
@@ -137,8 +131,8 @@
     .hero-chip {
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.5);
       backdrop-filter: blur(14px);
       text-transform: uppercase;
     }
@@ -147,23 +141,23 @@
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
       gap: 60px;
-      align-items: center;
       margin-top: 80px;
       margin-bottom: 72px;
+      align-items: center;
     }
 
     .hero-tag {
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 0.25em;
+      text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 18px;
     }
 
     .hero-name {
       font-size: 14px;
-      text-transform: uppercase;
       letter-spacing: 0.28em;
+      text-transform: uppercase;
       color: var(--text-muted);
       margin-bottom: 18px;
     }
@@ -177,30 +171,29 @@
     }
 
     .hero-subtitle {
-      max-width: 420px;
+      max-width: 440px;
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.7;
     }
 
     .hero-meta {
+      margin-top: 30px;
       display: grid;
       gap: 10px;
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--text-muted);
-      margin-top: 30px;
+      text-transform: uppercase;
     }
 
     .meta-row {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
     }
 
-    /* КАРТОЧКА С ФОТО */
-
+    /* фото блок */
     .hero-image-card {
       position: relative;
       border-radius: 22px;
@@ -208,15 +201,12 @@
       min-height: 520px;
       display: flex;
       align-items: flex-end;
-      padding: 22px 22px 20px;
+      padding: 22px;
       background: #050609;
-      box-shadow:
-        0 24px 66px rgba(0, 0, 0, 0.95),
-        0 0 0 1px rgba(255,255,255,0.06);
-      isolation: isolate;
+      box-shadow: 0 24px 66px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.06);
       transform: translate3d(0, calc(var(--scroll-f) * -8px), 0);
-      transition: transform 0.18s ease-out;
-      will-change: transform;
+      transition: transform .18s ease-out;
+      isolation: isolate;
     }
 
     .hero-photo {
@@ -227,11 +217,7 @@
       object-fit: cover;
       object-position: center top;
       filter: contrast(1.08) brightness(1.02);
-      z-index: 1;
       transform: scale(calc(1 + var(--scroll-f) * 0.015));
-      transform-origin: center center;
-      transition: transform 0.18s ease-out;
-      will-change: transform;
     }
 
     .hero-image-card::before {
@@ -241,10 +227,10 @@
       pointer-events: none;
       z-index: 0;
       background:
-        linear-gradient(0deg, rgba(5, 6, 9, 0.75) 0%, rgba(5, 6, 9, 0.0) 60%),
-        linear-gradient(90deg, rgba(5, 6, 9, 0.8) 0, rgba(5, 6, 9, 0.0) 75%),
+        linear-gradient(0deg, rgba(5, 6, 9, 0.8) 0%, rgba(5, 6, 9, 0.0) 60%),
+        linear-gradient(90deg, rgba(5, 6, 9, 0.85) 0, rgba(5, 6, 9, 0.0) 75%),
         radial-gradient(circle at top, rgba(242,210,113,0.2) 0, transparent 60%);
-      opacity: 0.55;
+      opacity: 0.6;
     }
 
     .hero-image-card::after {
@@ -265,9 +251,9 @@
     .hero-image-label {
       position: relative;
       z-index: 3;
+      width: 100%;
       display: flex;
       justify-content: space-between;
-      width: 100%;
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.2em;
@@ -280,9 +266,8 @@
       align-items: center;
       gap: 16px;
       font-size: 11px;
+      letter-spacing: .18em;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
     }
 
     .scroll-hint {
@@ -297,8 +282,8 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.18);
       display: flex;
-      justify-content: center;
       align-items: flex-start;
+      justify-content: center;
       padding-top: 5px;
     }
 
@@ -319,13 +304,13 @@
       );
     }
 
-    /* ОБЩИЕ СЕКЦИИ */
+    /* СЕКЦИИ */
 
     main {
-      position: relative;
-      z-index: 1;
       border-top: 1px solid rgba(255,255,255,0.04);
       background: radial-gradient(circle at bottom, #181927 0, #050609 70%);
+      position: relative;
+      z-index: 1;
     }
 
     .section {
@@ -336,10 +321,10 @@
 
     .section-label {
       font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
       color: var(--text-muted);
+      letter-spacing: 0.2em;
       margin-bottom: 16px;
+      text-transform: uppercase;
     }
 
     .section-title {
@@ -397,8 +382,8 @@
     .card {
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.07);
-      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.7));
       padding: 16px 16px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.7));
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -413,11 +398,11 @@
 
     .card:hover {
       border-color: rgba(242,210,113,0.7);
+      background: linear-gradient(135deg, var(--accent-soft), rgba(0,0,0,0.92));
+      transform: translateY(-2px);
       box-shadow:
         0 0 0 1px rgba(242,210,113,0.24),
         0 24px 60px rgba(0,0,0,0.85);
-      background: linear-gradient(135deg, var(--accent-soft), rgba(0,0,0,0.92));
-      transform: translateY(-2px);
     }
 
     .card-title {
@@ -436,7 +421,7 @@
       margin-top: auto;
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       color: var(--text-muted);
     }
 
@@ -514,27 +499,30 @@
       letter-spacing: 0.22em;
     }
 
-    /* АДАПТИВ */
+    /* АДАПТИВ — мягкий, без крайностей */
 
+    /* планшеты / узкие экраны */
     @media (max-width: 1024px) {
       .page::after {
         inset: 40px 24px;
+        border-radius: 24px;
+      }
+
+      .hero {
+        padding: 52px 32px 68px;
+      }
+
+      .section {
+        padding: 44px 32px 68px;
       }
     }
 
     @media (max-width: 900px) {
-      .hero {
-        padding: 40px 28px 60px;
-      }
-
       .hero-main {
         grid-template-columns: 1fr;
         gap: 40px;
         margin-top: 56px;
-      }
-
-      .section {
-        padding: 40px 28px 64px;
+        margin-bottom: 56px;
       }
 
       .section-grid {
@@ -556,17 +544,30 @@
       }
     }
 
+    /* телефоны — только чуть-чуть отодвигаем от краёв */
     @media (max-width: 600px) {
+      .page::after {
+        inset: 24px 16px;
+        border-radius: 20px;
+      }
+
       .hero {
-        padding: 28px 18px 44px;
+        padding: 32px 22px 44px;
       }
 
       .section {
-        padding: 30px 18px 52px;
+        padding: 30px 22px 52px;
+      }
+
+      .hero-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 10px;
       }
 
       .hero-title {
-        font-size: 32px;
+        font-size: 30px;
         letter-spacing: 0.14em;
       }
 
@@ -589,13 +590,12 @@
         letter-spacing: 0.18em;
       }
 
-      .section-title {
-        font-size: 18px;
-        letter-spacing: 0.1em;
+      .cards {
+        gap: 14px;
       }
 
-      .section-text {
-        font-size: 13px;
+      .card {
+        padding: 14px 14px 16px;
       }
 
       .contacts-inner {
@@ -609,52 +609,17 @@
         align-items: flex-start;
         gap: 8px;
       }
-
-      .page::after {
-        inset: 24px 16px;
-        border-radius: 24px;
-      }
     }
 
-    /* ДОП. ФИКС ОТСТУПОВ НА САМЫХ МАЛЕНЬКИХ ЭКРАНАХ */
-    @media (max-width: 480px) {
-      body,
-      .hero,
-      .hero-main,
-      .section,
-      .section-grid,
-      .cards,
-      .hero-bottom {
-        padding-left: 22px !important;
-        padding-right: 22px !important;
-      }
-
-      .hero-logo,
-      .hero-top,
-      .hero-tag,
-      .hero-name,
+    /* совсем мелкие экраны */
+    @media (max-width: 420px) {
       .hero-title {
-        padding-left: 22px !important;
+        font-size: 26px;
+        letter-spacing: 0.12em;
       }
 
-      .hero-subtitle,
-      .hero-meta {
-        padding-left: 22px !important;
-        padding-right: 22px !important;
-      }
-
-      .hero-image-card {
-        margin-left: 12px !important;
-        margin-right: 12px !important;
-      }
-
-      .scroll-hint {
-        margin-left: 22px !important;
-      }
-
-      .card {
-        margin-left: 10px !important;
-        margin-right: 10px !important;
+      .page-micro--tr {
+        display: none;
       }
     }
   </style>
@@ -668,11 +633,13 @@
 
     <!-- HERO -->
     <header class="hero">
+
       <div class="hero-top">
         <div class="hero-logo">
           <div class="logo-dot"></div>
-          <span>Daniil Gauss / Design</span>
+          <span>daniil gauss / design</span>
         </div>
+
         <div class="hero-chip">portfolio — 2025</div>
       </div>
 
@@ -703,7 +670,7 @@
         </div>
 
         <div class="hero-image-card">
-          <img src="images/portrait.jpg" alt="Daniil Gauss portrait" class="hero-photo">
+          <img class="hero-photo" src="images/portrait.jpg" alt="Daniil Gauss">
           <div class="hero-image-label">
             <span>portrait — 01</span>
             <span>silent frame / gauss</span>
@@ -718,7 +685,9 @@
           </div>
           <span>scroll to explore</span>
         </div>
+
         <div class="accent-line"></div>
+
         <span>available for collaborations & commissions</span>
       </div>
     </header>
@@ -732,9 +701,9 @@
             <h2 class="section-title">о себе</h2>
             <p class="section-text">
               Классическая художественная школа и скульптура научили меня чувствовать объём, вес и паузы
-              между формами. Сейчас материалом стали пиксели и пользовательский опыт.
-              Я работаю на стыке графического дизайна и интерфейсов: собираю бренды, лендинги
-              и визуальные конструкции, которые выглядят как постер и ведут себя как продукт.
+              между формами. Сейчас материалом стали пиксели и пользовательский опыт. Я работаю на стыке
+              графического дизайна и интерфейсов: собираю бренды, лендинги и визуальные конструкции,
+              которые выглядят как постер и ведут себя как продукт.
             </p>
           </div>
           <div class="info-pairs">
@@ -807,9 +776,8 @@
           <article class="card">
             <div class="card-title">campaign · политический брендинг</div>
             <div class="card-text">
-              Айдентика и визуальная система для предвыборной кампании:
-              логотип, цвет, плакаты, цифровые макеты. Визуал выстроил спокойный,
-              но уверенный образ кандидата.
+              Айдентика и визуальная система для предвыборной кампании: логотип, цвет, плакаты,
+              цифровые макеты. Визуал выстроил спокойный, но уверенный образ кандидата.
             </div>
             <div class="card-meta">роль — графический дизайнер</div>
           </article>
@@ -862,9 +830,15 @@
 
           <div>
             <div class="contacts-links">
-              <a href="mailto:demogorgonbafomet13@gmail.com">demogorgonbafomet13@gmail.com</a>
-              <a href="https://t.me/nichegosmeshnogo777" target="_blank">Telegram</a>
-              <a href="https://www.behance.net/lessrf" target="_blank">Behance</a>
+              <a href="mailto:demogorgonbafomet13@gmail.com">
+                demogorgonbafomet13@gmail.com
+              </a>
+              <a href="https://t.me/nichegosmeshnogo777" target="_blank">
+                Telegram
+              </a>
+              <a href="https://www.behance.net/lessrf" target="_blank">
+                Behance
+              </a>
             </div>
             <div class="footer-micro">
               daniil gauss · visual / ui design · 2025
@@ -875,7 +849,7 @@
     </main>
   </div>
 
-  <!-- анимация при скролле -->
+  <!-- параллакс при скролле -->
   <script>
     (function () {
       const root = document.documentElement;
@@ -883,7 +857,7 @@
       function updateScrollVar() {
         const y = window.scrollY || window.pageYOffset || 0;
         const h = window.innerHeight || 1;
-        const f = Math.min(y / h, 3); // до 3 экранов
+        const f = Math.min(y / h, 3);
         root.style.setProperty('--scroll-f', f.toString());
       }
 
