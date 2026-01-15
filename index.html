@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>DANIIL GAUSS — Visual & UI Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
       --bg-main: #050609;
@@ -28,6 +29,11 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .page {
       position: relative;
       min-height: 100vh;
@@ -37,7 +43,7 @@
       overflow: hidden;
     }
 
-    /* текстура + параллакс */
+    /* матовая диагональная текстура + параллакс */
     .page::before {
       content: "";
       position: absolute;
@@ -59,6 +65,7 @@
       will-change: transform;
     }
 
+    /* тех-рамка с лёгким движением */
     .page::after {
       content: "";
       position: absolute;
@@ -75,7 +82,7 @@
       will-change: transform;
     }
 
-    /* микро-тех надписи */
+    /* микро-текстовые артефакты */
     .page-micro {
       position: fixed;
       z-index: 10;
@@ -84,28 +91,22 @@
       text-transform: uppercase;
       color: rgba(154,158,170,0.55);
       pointer-events: none;
-      white-space: nowrap;
     }
     .page-micro--tl { left: 22px; bottom: 18px; }
     .page-micro--tr { right: 22px; top: 18px; }
 
-    /* БАЗОВЫЙ КОНТЕЙНЕР ДЛЯ ВСЕГО КОНТЕНТА */
+    /* HERO */
 
-    .shell {
+    .hero {
       position: relative;
       max-width: 1180px;
       margin: 0 auto;
       padding: 64px 40px 80px;
-      z-index: 1;
-    }
-
-    /* HERO */
-
-    .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      z-index: 1;
     }
 
     .hero-top {
@@ -116,7 +117,6 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
-      gap: 16px;
     }
 
     .hero-logo {
@@ -141,8 +141,6 @@
       background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(14px);
       text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 0.16em;
     }
 
     .hero-main {
@@ -201,7 +199,7 @@
       gap: 16px;
     }
 
-    /* HERO IMAGE */
+    /* КАРТОЧКА С ФОТО */
 
     .hero-image-card {
       position: relative;
@@ -243,10 +241,10 @@
       pointer-events: none;
       z-index: 0;
       background:
-        linear-gradient(0deg, rgba(5, 6, 9, 0.8) 0%, rgba(5, 6, 9, 0.0) 60%),
-        linear-gradient(90deg, rgba(5, 6, 9, 0.85) 0, rgba(5, 6, 9, 0.0) 75%),
+        linear-gradient(0deg, rgba(5, 6, 9, 0.75) 0%, rgba(5, 6, 9, 0.0) 60%),
+        linear-gradient(90deg, rgba(5, 6, 9, 0.8) 0, rgba(5, 6, 9, 0.0) 75%),
         radial-gradient(circle at top, rgba(242,210,113,0.2) 0, transparent 60%);
-      opacity: 0.6;
+      opacity: 0.55;
     }
 
     .hero-image-card::after {
@@ -314,10 +312,14 @@
     .accent-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, rgba(242, 210, 113, 0.0), rgba(242, 210, 113, 0.6));
+      background: linear-gradient(
+        90deg,
+        rgba(242, 210, 113, 0.0),
+        rgba(242, 210, 113, 0.6)
+      );
     }
 
-    /* СЕКЦИИ */
+    /* ОБЩИЕ СЕКЦИИ */
 
     main {
       position: relative;
@@ -512,46 +514,32 @@
       letter-spacing: 0.22em;
     }
 
-    /* ============== АДАПТИВ ============== */
+    /* АДАПТИВ */
 
-    /* планшеты */
     @media (max-width: 1024px) {
       .page::after {
         inset: 40px 24px;
-        border-radius: 24px;
       }
+    }
 
-      .shell {
-        padding: 48px 28px 60px;
-      }
-
-      .section {
-        padding: 44px 28px 64px;
+    @media (max-width: 900px) {
+      .hero {
+        padding: 40px 28px 60px;
       }
 
       .hero-main {
+        grid-template-columns: 1fr;
         gap: 40px;
         margin-top: 56px;
-        margin-bottom: 56px;
+      }
+
+      .section {
+        padding: 40px 28px 64px;
       }
 
       .section-grid {
         grid-template-columns: 1fr;
         gap: 28px;
-      }
-    }
-
-    /* планшеты и большие телефоны */
-    @media (max-width: 900px) {
-      .hero-main {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        margin-top: 40px;
-        margin-bottom: 48px;
-      }
-
-      .hero-image-card {
-        min-height: 420px;
       }
 
       .cards {
@@ -561,55 +549,30 @@
       .hero-bottom {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
       }
 
-      .meta-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
+      .hero-image-card {
+        min-height: 420px;
       }
     }
 
-    /* мобильные */
     @media (max-width: 600px) {
-      .page::after {
-        inset: 24px 14px;
-        border-radius: 18px;
-      }
-
-      .shell {
-        padding: 28px 18px 40px;   /* ВАЖНО: отступы слева/справа */
+      .hero {
+        padding: 28px 18px 44px;
       }
 
       .section {
-        padding: 28px 18px 44px;   /* аналогичные отступы */
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .hero-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        font-size: 10px;
-      }
-
-      .hero-tag {
-        font-size: 10px;
-        letter-spacing: 0.22em;
-      }
-
-      .hero-name {
-        font-size: 11px;
-        letter-spacing: 0.24em;
+        padding: 30px 18px 52px;
       }
 
       .hero-title {
-        font-size: 28px;
+        font-size: 32px;
         letter-spacing: 0.14em;
+      }
+
+      .hero-name {
+        font-size: 12px;
+        letter-spacing: 0.24em;
       }
 
       .hero-subtitle {
@@ -618,7 +581,7 @@
 
       .hero-image-card {
         min-height: 360px;
-        padding: 14px 14px 14px;
+        padding: 16px;
       }
 
       .hero-image-label {
@@ -635,14 +598,6 @@
         font-size: 13px;
       }
 
-      .cards {
-        gap: 14px;
-      }
-
-      .card {
-        padding: 14px 14px 16px;
-      }
-
       .contacts-inner {
         flex-direction: column;
         align-items: flex-start;
@@ -655,46 +610,68 @@
         gap: 8px;
       }
 
-      .page-micro--tl,
-      .page-micro--tr {
-        font-size: 8px;
-        letter-spacing: 0.18em;
+      .page::after {
+        inset: 24px 16px;
+        border-radius: 24px;
       }
     }
 
-    /* совсем маленькие экраны */
-    @media (max-width: 420px) {
-      .hero-title {
-        font-size: 24px;
-        letter-spacing: 0.12em;
+    /* ДОП. ФИКС ОТСТУПОВ НА САМЫХ МАЛЕНЬКИХ ЭКРАНАХ */
+    @media (max-width: 480px) {
+      body,
+      .hero,
+      .hero-main,
+      .section,
+      .section-grid,
+      .cards,
+      .hero-bottom {
+        padding-left: 22px !important;
+        padding-right: 22px !important;
       }
 
+      .hero-logo,
+      .hero-top,
+      .hero-tag,
+      .hero-name,
+      .hero-title {
+        padding-left: 22px !important;
+      }
+
+      .hero-subtitle,
       .hero-meta {
-        letter-spacing: 0.12em;
-        font-size: 10px;
+        padding-left: 22px !important;
+        padding-right: 22px !important;
       }
 
       .hero-image-card {
-        min-height: 320px;
+        margin-left: 12px !important;
+        margin-right: 12px !important;
       }
 
-      .page-micro--tr {
-        display: none;
+      .scroll-hint {
+        margin-left: 22px !important;
+      }
+
+      .card {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="page">
     <!-- микро-системные надписи -->
     <div class="page-micro page-micro--tl">SYS·013 / GAUSS DIVISION</div>
     <div class="page-micro page-micro--tr">BUILD 2025.01 · NIGHT LAYOUT</div>
 
-    <header class="hero shell">
+    <!-- HERO -->
+    <header class="hero">
       <div class="hero-top">
         <div class="hero-logo">
           <div class="logo-dot"></div>
-          <span>daniil gauss / design</span>
+          <span>Daniil Gauss / Design</span>
         </div>
         <div class="hero-chip">portfolio — 2025</div>
       </div>
@@ -703,7 +680,10 @@
         <div>
           <p class="hero-tag">visual / ui · graphic design</p>
           <div class="hero-name">daniil gauss</div>
-          <h1 class="hero-title">calm surface.<br>loud structure.</h1>
+
+          <h1 class="hero-title">
+            calm surface.<br>loud structure.
+          </h1>
 
           <p class="hero-subtitle">
             Графический и UX/UI дизайнер. Строю визуальные системы, которые держатся на тишине,
@@ -723,7 +703,7 @@
         </div>
 
         <div class="hero-image-card">
-          <img src="images/portrait.jpg" alt="Daniil Gauss" class="hero-photo">
+          <img src="images/portrait.jpg" alt="Daniil Gauss portrait" class="hero-photo">
           <div class="hero-image-label">
             <span>portrait — 01</span>
             <span>silent frame / gauss</span>
@@ -752,9 +732,9 @@
             <h2 class="section-title">о себе</h2>
             <p class="section-text">
               Классическая художественная школа и скульптура научили меня чувствовать объём, вес и паузы
-              между формами. Сейчас материалом стали пиксели и пользовательский опыт. Я работаю на стыке
-              графического дизайна и интерфейсов: собираю бренды, лендинги и визуальные конструкции,
-              которые выглядят как постер и ведут себя как продукт.
+              между формами. Сейчас материалом стали пиксели и пользовательский опыт.
+              Я работаю на стыке графического дизайна и интерфейсов: собираю бренды, лендинги
+              и визуальные конструкции, которые выглядят как постер и ведут себя как продукт.
             </p>
           </div>
           <div class="info-pairs">
@@ -827,8 +807,9 @@
           <article class="card">
             <div class="card-title">campaign · политический брендинг</div>
             <div class="card-text">
-              Айдентика и визуальная система для предвыборной кампании: логотип, цвет, плакаты,
-              цифровые макеты. Визуал выстроил спокойный, но уверенный образ кандидата.
+              Айдентика и визуальная система для предвыборной кампании:
+              логотип, цвет, плакаты, цифровые макеты. Визуал выстроил спокойный,
+              но уверенный образ кандидата.
             </div>
             <div class="card-meta">роль — графический дизайнер</div>
           </article>
@@ -881,15 +862,9 @@
 
           <div>
             <div class="contacts-links">
-              <a href="mailto:demogorgonbafomet13@gmail.com">
-                demogorgonbafomet13@gmail.com
-              </a>
-              <a href="https://t.me/nichegosmeshnogo777" target="_blank">
-                Telegram
-              </a>
-              <a href="https://www.behance.net/lessrf" target="_blank">
-                Behance
-              </a>
+              <a href="mailto:demogorgonbafomet13@gmail.com">demogorgonbafomet13@gmail.com</a>
+              <a href="https://t.me/nichegosmeshnogo777" target="_blank">Telegram</a>
+              <a href="https://www.behance.net/lessrf" target="_blank">Behance</a>
             </div>
             <div class="footer-micro">
               daniil gauss · visual / ui design · 2025
@@ -900,7 +875,7 @@
     </main>
   </div>
 
-  <!-- параллакс при скролле -->
+  <!-- анимация при скролле -->
   <script>
     (function () {
       const root = document.documentElement;
@@ -908,7 +883,7 @@
       function updateScrollVar() {
         const y = window.scrollY || window.pageYOffset || 0;
         const h = window.innerHeight || 1;
-        const f = Math.min(y / h, 3);
+        const f = Math.min(y / h, 3); // до 3 экранов
         root.style.setProperty('--scroll-f', f.toString());
       }
 
